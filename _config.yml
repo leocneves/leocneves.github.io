@@ -1,0 +1,99 @@
+# Site wide configuration
+
+title: Leonardo Contador Neves
+# locale: pt_BR
+logo: # filename of a logo image that has been placed into your images directory
+
+# Enter the following platform usernames if you would like for them to appear on your site.
+owner:
+  name: Leonardo C. Neves
+  avatar: foto.jpeg
+  bio: "Engineer and technology lover."
+  email: leocneves@fei.edu.br
+  # Do not include the @ symbol in your Twitter username
+  # twitter: laderast
+  linkedin: leonardo-contador-neves-096312119
+  github: leocneves
+  # orcid: # ID Number (ex. 0000-0000-0000-0000)
+  # researchgate: #username
+  # mendeley: #username
+  # google:
+  #   plus: #username
+  #   analytics:
+  #   verify:
+  #   scholar: #id
+  # facebook: #username
+  instagram: contmeneves
+  # bing-verify:
+  # stackoverflow: #123456/username from a "https://stackoverflow.com/users/123456/username" link
+  # xing: #username
+  # lastfm: #username
+  # tumblr: #username
+  # pinterest: #username
+  # foursquare: #username
+  # steam: #username
+  # dribbble: #username
+  # youtube: #username
+  # soundcloud: #username
+  # weibo: #username
+  # flickr: #username
+  # codepen: #username
+  # disqus-shortname:
+
+# The following adjust the accents for your site. If you would like to further edit colors, fonts, font sizes, etc.
+# you may do so in _sass/variables.scss
+# highlight-color: '#CC0000'
+# lowlight-color: '#000'
+highlight-color: '#686868'
+lowlight-color: '#3a3a3a'
+
+  # NOTE: If you would like your site to be licensed under a creative commons license, uncomment the 'yes' next to the type of license you wish to use.
+creative-commons:
+  cc-by: #yes
+  cc-by-nc: yes
+
+# languages
+language_default : 'en'
+languages: ['en', 'pt']
+
+
+#DO NOT EDIT BEYOND THIS POINT
+# Jekyll configuration
+
+permalink:   /:categories/:title/
+markdown:    kramdown
+highlighter: rouge
+sass:
+  sass_dir: _sass
+  style: compressed
+
+plugins_dir: ./_plugins
+
+plugins_dir:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-paginate
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
+  - jekyll-feed
+  - jekyll-include-cache
+  - jekyll-multiple-languages-plugin
+  - kramdown-parser-gfm
+  - html-proofer
+
+exclude_from_localizations: ["javascript", "images", "css", "assets"]
+
+# default_locale_in_subfolder: true
+
+plugins: [jekyll-gist, jekyll-paginate, jekyll-seo-tag, jekyll-paginate, jekyll-multiple-languages-plugin]
+
+kramdown:
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  enable_coderay: false
+
+include: [".htaccess"]
+exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md"]

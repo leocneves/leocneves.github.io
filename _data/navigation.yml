@@ -1,0 +1,27 @@
+# Site navigation links
+- title: Home
+  url: /
+#
+# - title: Presentations
+#   url: /presentations/
+
+# - title: CV
+#   url: /cv/
+
+- title: Blog
+  url: /blog/
+
+# - title: Workshops
+#   url: /workshops/
+
+# languages:
+# - language: "en" links:
+# - title: Home url: /
+# - title: Blog
+#   url: /blog/
+#
+#
+# - language: "pt" links:
+# - title: "Sobre" url: /pt/
+# - title: Blog
+#   url: /pt/blog/

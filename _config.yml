@@ -1,11 +1,11 @@
 # Setup
-title: Not Pure Poole
+title: Leonardo C. Neves
 description: A simple, beautiful, and powerful Jekyll theme for blogs
-url: https://vszhub.github.io
-avatar: /avatar.jpeg
+url: https://leocneves.github.io
+avatar: /profile.jpg
 paginate: 5
 permalink: pretty
-cover_image: /bg.jpeg
+cover_image: /cover.jpg
 
 # Gems
 plugins:
@@ -29,14 +29,15 @@ exclude:
 
 # Optimize Jekyl SEO Tag
 twitter:
-  username: vszhub
+  username: leocneves
   card: summary
 logo: logo.png
 social:
-  name: Songzi Vong
+  name: Leonardo C. Neves
   links:
-    - https://twitter.com/vszhub
-    - https://github.com/vszhub
+    - https://twitter.com/leocneves
+    - https://github.com/leocneves
+
 google_site_verification: xxxxx
 lang: en
 
@@ -54,6 +55,6 @@ sass:
 
 # Specify the author for blog posts
 author:
-  name: Songzi Vong
-  url: https://github.com/vszhub/
-  email: vszhub@gmail.com
+  name: Leonardo C. Neves
+  url: https://github.com/leocneves/
+  email: neves.leonardoc@gmail.com

@@ -39,4 +39,27 @@
       </ul>
     </div>
   {%- endif %}
+
+  <br>
+  <center>
+  <nav id="lang-sel" >
+      <ul class="lang" style="list-style: none;">
+          {% capture link1 %}{{ site.baseurl_root }}{{ page.url}}{% endcapture %}
+          {% capture link2 %}{{ site.baseurl_root }}/pt{{ page.url}}{% endcapture %}
+          {% if site.lang == "en" %}
+          <li class="masthead_menu-item visible-links">
+  	        <a href="{{ link1 }}" class="enabled">{% t global.english%} {{ site.data.languages["en"].icon }} </a>|<a href="{{ link2 }}"> {% t global.portuguese%} {{ site.data.languages["pt"].icon }}</a>
+          </li>
+          {% elsif site.lang == "pt" %}
+          <li class="masthead_menu-item lang">
+  	        <a href="{{ link1 }}">{% t global.english%} {{ site.data.languages["en"].icon }} </a>|<a href="{{ link2 }}" class="enabled"> {% t global.portuguese%} {{ site.data.languages["pt"].icon }}</a>
+          </li>
+          {% endif %}
+      </ul>
+   </nav>
+
+   </center>
+
+
+
 </header>

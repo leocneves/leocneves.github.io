@@ -1,0 +1,9 @@
+global:
+  english: Eng 
+  portuguese: Pt
+pages:
+  home: Home
+  blog: Blog
+titles:
+  pagination: Pagination
+

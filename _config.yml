@@ -1,6 +1,6 @@
 # Setup
 title: Leonardo C. Neves
-description: A simple, beautiful, and powerful Jekyll theme for blogs
+description: Engineer and technology lover.
 url: https://leocneves.github.io
 avatar: /profile.jpg
 paginate: 5
@@ -28,6 +28,7 @@ exclude:
   - not-pure-poole.gemspec
 
 # Optimize Jekyl SEO Tag
+linkedin: leonardo-contador-neves-096312119
 twitter:
   username: leocneves
   card: summary
@@ -39,7 +40,9 @@ social:
     - https://github.com/leocneves
 
 google_site_verification: xxxxx
-lang: en
+# lang: en
+
+languages: ["en", "pt"]
 
 sass:
   sass_dir: _sass

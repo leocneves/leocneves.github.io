@@ -96,10 +96,6 @@
     <ul class="home-header-menu pure-menu-list">
       
         <li class="pure-menu-item">
-          <a href="/categories/" class="pure-menu-link current-item"">Categories</a>
-        </li>
-      
-        <li class="pure-menu-item">
           <a href="/tags/" class="pure-menu-link "">Tags</a>
         </li>
       
@@ -112,10 +108,22 @@
 <h1>Categories</h1>
 
 <div class="taxonomies-wrapper">
-  <ul class="taxonomies"></ul>
+  <ul class="taxonomies"><li><a class="taxonomy" href="/categories/#blog">
+              <span>blog</span>
+              <span class="taxonomy-count">3</span>
+            </a>
+          </li></ul>
 </div>
 
-<script>
+<h2 id="blog">blog</h2>
+      <ul class="post-list-by-taxonomy"><li>
+            <time datetime="">2020-10-02</time> &raquo; <a href="/blog/2020/10/02/testing-mathjax/">Testing MathJax</a>
+          </li><li>
+            <time datetime="">2020-10-01</time> &raquo; <a href="/blog/2020/10/01/releasing-not-pure-poole-v0-1-0/">Releasing Not Pure Poole v0.1.0</a>
+          </li><li>
+            <time datetime="">2020-09-29</time> &raquo; <a href="/blog/2020/09/29/welcome-to-not-pure-poole/">Welcome to Not Pure Poole</a>
+          </li></ul>
+      <a href="#" onclick="backToTop()" class="back-to-top">Top &#8648;</a><script>
   function backToTop() {
     const main = document.getElementById("site-main");
     main.scrollTop = 0;

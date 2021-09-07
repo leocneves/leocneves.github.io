@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>http://localhost:4000/pt/2020/09/29/teste/</loc>
+<lastmod>2020-09-30T14:08:25-03:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/pt/blog/2020/11/01/fraude-pca-python/</loc>
+<lastmod>2020-11-01T00:00:00-03:00</lastmod>
+</url>
+<url>
+<loc>http://localhost:4000/pt/about/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/pt/blog/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/pt/categories/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/pt/dates/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/pt/</loc>
+</url>
+<url>
+<loc>http://localhost:4000/pt/tags/</loc>
+</url>
+</urlset>

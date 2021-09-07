@@ -8,3 +8,4 @@ gem 'jekyll-gist'
 gem 'jekyll-seo-tag'
 gem 'jekyll-feed'
 gem 'jekyll-multiple-languages-plugin'
+gem "github-pages"

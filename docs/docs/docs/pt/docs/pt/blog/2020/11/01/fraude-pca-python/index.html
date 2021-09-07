@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="pt">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/grids-responsive-min.css">
+  <link rel="stylesheet" href="/pt/assets/styles.css"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Detecção de Transações Fraudulentas no Cartão de Crédito com PCA | Leonardo C. Neves</title>
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Detecção de Transações Fraudulentas no Cartão de Crédito com PCA" />
+<meta name="author" content="Leonardo C. Neves" />
+<meta property="og:locale" content="pt" />
+<meta name="description" content="Detecção de anomalias nos dados usando PCA" />
+<meta property="og:description" content="Detecção de anomalias nos dados usando PCA" />
+<link rel="canonical" href="https://leocneves.github.io/pt/blog/2020/11/01/fraude-pca-python/" />
+<meta property="og:url" content="https://leocneves.github.io/pt/blog/2020/11/01/fraude-pca-python/" />
+<meta property="og:site_name" content="Leonardo C. Neves" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-11-01T00:00:00-03:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Detecção de Transações Fraudulentas no Cartão de Crédito com PCA" />
+<meta name="twitter:site" content="@leocneves" />
+<meta name="twitter:creator" content="@Leonardo C. Neves" />
+<meta name="google-site-verification" content="xxxxx" />
+<script type="application/ld+json">
+{"@type":"BlogPosting","headline":"Detecção de Transações Fraudulentas no Cartão de Crédito com PCA","datePublished":"2020-11-01T00:00:00-03:00","url":"https://leocneves.github.io/pt/blog/2020/11/01/fraude-pca-python/","dateModified":"2020-11-01T00:00:00-03:00","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://leocneves.github.io/pt/logo.png"},"name":"Leonardo C. Neves"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://leocneves.github.io/pt/blog/2020/11/01/fraude-pca-python/"},"author":{"@type":"Person","name":"Leonardo C. Neves"},"description":"Detecção de anomalias nos dados usando PCA","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="https://leocneves.github.io/pt/feed.xml" title="Leonardo C. Neves" />
+</head>
+
+
+  <body>
+
+    <div class="container pure-g"><div class="sidebar-left pure-u-1 pure-u-md-1-4" style="background-color: rgb(40, 73, 77); color: rgb(255, 255, 255); background-image: url(/pt/cover.jpg);"><header class="masthead">
+  <div class="avatar"><img src="/pt/profile.jpg" class="avatar-image" alt="Leonardo C. Neves">
+    </div>
+  <div class="masthead-title">
+    <a href="/pt/" title="Home">Leonardo C. Neves</a>
+  </div>
+  <div class="masthead-tagline">
+    <small>Engineer and technology lover.</small>
+  </div><nav class="navigation">
+    <ul class="navigation-list"><li class="navigation-item">
+        <a onclick="sessionStorage.setItem('forceCheckScroll', 'true')" href="/pt/blog/">Blog</a>
+      </li><li class="navigation-item">
+        <a onclick="sessionStorage.setItem('forceCheckScroll', 'true')" href="/pt/projects/">Projects</a>
+      </li></ul>
+  </nav><div class="social pure-menu pure-menu-horizontal">
+      <ul class="social-icons pure-menu-list">
+      <li class="pure-menu-item">
+          <a class="social-icon pure-menu-link" href="leocneves@fei.edu.br">
+            <i class="fas fa-envelope" title="Email"></i>
+          </a>
+        </li><li class="pure-menu-item">
+          <a class="social-icon pure-menu-link" href="https://github.com/leocneves">
+            <i class="fab fa-github" title="GitHub"></i>
+          </a>
+        </li><li class="pure-menu-item">
+          <a class="social-icon pure-menu-link" href="https://instagram.com/contmeneves">
+            <i class="fab fa-instagram" title="Instagram"></i>
+          </a>
+        </li><li class="pure-menu-item">
+          <a class="social-icon pure-menu-link" href="https://www.linkedin.com/in/leonardo-contador-neves-096312119">
+            <i class="fab fa-linkedin" title="Linkedin"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  <br>
+  <center>
+
+  <nav id="lang-sel" >
+      <ul class="lang" style="list-style: none;">
+          
+          
+          
+          <li class="masthead_menu-item lang">
+  	        <a href="/blog/2020/11/01/fraude-pca-python/">Eng 🇺🇸 </a>|<a href="/pt/blog/2020/11/01/fraude-pca-python/" class="enabled"> Pt 🇧🇷</a>
+          </li>
+          
+      </ul>
+   </nav>
+
+   </center>
+
+
+
+</header>
+</div>
+
+      <div class="content pure-u-1 pure-u-md-1-2"><main>
+  <article class="post">
+  <h1 class="post-title">Detecção de Transações Fraudulentas no Cartão de Crédito com PCA</h1>
+  <div class="post-meta"><time datetime="2020-11-01T00:00:00-03:00" itemprop="datePublished">1 Nov 2020</time></div>
+
+  <h3 id="indice">Indice</h3>
+
+<ol>
+  <li>Introdução</li>
+  <li>Análise Exploratória</li>
+  <li>Preparação e Modelagem dos Dados</li>
+  <li>Resultados e Conclusões</li>
+  <li>Referências</li>
+</ol>
+
+<hr />
+
+<h2 id="introdução">Introdução</h2>
+
+<p>Nos dias atuais em meio à evolução dos meios digitais o número de transações feitas por meio destes canais tem aumentado ano após anos. Com esse aumento temos que elevar técnicas de segurança, a medida que fraudes são cada vez mais recorrentes nesses canais.
+O objetivo deste trabalho é explorar alguns métodos de detecção de fraude com o intúito de verificar a prova de conceito dos métodos e suas características na aplicação de soluções junto ao negócio.</p>
+
+<hr />
+<h2 id="análise-exploratória">Análise Exploratória</h2>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># Importando as bibliotecas necessárias
+</span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sn</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">roc_auc_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+
+<span class="c1"># Configurações necessárias
+</span><span class="n">pd</span><span class="p">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">'display.max_columns'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># importando os dados necessários para um pandas dataframe
+# A base está no item 6 da referência
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'../input/creditcardfraud/creditcard.csv'</span><span class="p">)</span>
+
+<span class="c1"># Tipos das variáveis e se há nulos
+</span><span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">.</span><span class="n">info</span><span class="p">())</span>
+
+<span class="c1"># Estatística básica das variáveis
+</span><span class="n">df</span><span class="p">.</span><span class="n">describe</span><span class="p">()</span></code></pre></figure>
+
+<h3 id="conclusões-parciais">Conclusões Parciais</h3>
+
+<p>A pricípio, um ponto importante a ser considerado no conjunto de dados é que para proteção dos dados dos cliente uma primeira transformação nos dados foi feita e o que temos são os 28 componentes principais desta transfomação (com adição da coluna ‘Amount’, que representa o valor da transação e a coluna ‘Time’, que representa o delta T daquela linha para a primeira transação no conjunto de dados).</p>
+
+<p>Uma rápida análise nas distribuições dos dados podemos notar que a coluna que traz o valor da transação aparece zerada em algumas linhas e isso terá de ser tratado, uma vez que transações zeradas podem representar falhas na leitura da transação e mesmo podendo inferir este valor (substituição pela média, entre outras técnicas) vamos tentar não carregar um erro, a princípio, para as próximas etapas.</p>
+
+<p>Por fim podemos notar que não só pela origem do problema, mas também pela própria coluna ‘Class’, os dados estão muito desbalanceados, a medida que o evento fraude é extremamente raro em meio a diversas transações, o que pode causar problemas em técnicas de classificação.</p>
+
+<hr />
+
+<h2 id="preparação-e-modelagem-dos-dados">Preparação e Modelagem dos Dados</h2>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># Quebrando o dataframe em treino e teste (70% treino e 30% teste).
+</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">.</span><span class="n">drop</span><span class="p">([</span><span class="s">'Time'</span><span class="p">,</span> <span class="s">'Class'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'Class'</span><span class="p">]</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span></code></pre></figure>
+
+<ul>
+  <li>Baseline model</li>
+</ul>
+
+<p>Aqui precisamos de um modelo básico para comparação com outras técnicas. O modelo escolhido foi a regressão logística.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1"># Criando o modelo e treinando com os dados de treino
+</span><span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">).</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span></code></pre></figure>
+
+<ul>
+  <li>Reconstrução do Erro com PCA</li>
+</ul>
+
+<p>Aqui a idéia é transformarmos mais um vez o consjunto de dados visando uma variancia explicada de 95% (deixando o algoritmo dizer o melhor número de componentes para representar os dados), assim aplicamos a transformação inversa para reconstruir os dados e por fim calculamos o MSE (Mean Square Error) de cada ponto para detecção das anomalias. Aqui o threshold adotado é o intervalo de desvios padrões da média que minimiza a quantidade de FPs nas predições.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="c1">#Instanciando o PCA do sklearn
+</span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+
+<span class="c1"># Aplicando a transformação do PCA nos dados
+</span><span class="n">df_reduced</span> <span class="o">=</span> <span class="n">pca</span><span class="p">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="c1"># Aplicando a reconstrução das componentes principais
+</span><span class="n">df_inv</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pca</span><span class="p">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">df_reduced</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="n">X_train</span><span class="p">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="c1"># Calculando o MSE de cada ponto da base de treino
+</span><span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X_train</span><span class="p">.</span><span class="n">values</span> <span class="o">-</span> <span class="n">df_inv</span><span class="p">.</span><span class="n">values</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">result</span><span class="p">[</span><span class="s">'Class'</span><span class="p">]</span> <span class="o">=</span> <span class="n">y_train</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="c1"># Calculando a média e o Desvio padrão da classe majoritária
+</span><span class="n">mean_zero</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">result</span><span class="p">.</span><span class="n">Class</span> <span class="o">==</span> <span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">std_zero</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">result</span><span class="p">.</span><span class="n">Class</span> <span class="o">==</span> <span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">].</span><span class="n">std</span><span class="p">()</span>
+<span class="c1"># Aplicando a predição de fraud para dados maiores que a média mais um intervalo de desvio padrão
+</span><span class="n">result</span><span class="p">[</span><span class="s">'predicted'</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nb">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span> <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">mean_zero</span> <span class="o">+</span> <span class="n">std_zero</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span></code></pre></figure>
+
+<hr />
+
+<h1 id="resultados-e-conclusões">Resultados e Conclusões</h1>
+
+<p>Para a avaliação dos dados foi escolhida a métrica ROC AUC (Area Under the Receiver Operating Characteristic) e os dados obtidos de cada medição, no treino e no teste pode ser visto na tabela a seguir:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Classificador</th>
+      <th style="text-align: center">Score no Treino</th>
+      <th style="text-align: center">Socore no Teste</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">Regressão Logística</td>
+      <td style="text-align: center">0.807</td>
+      <td style="text-align: center">0.809</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">Reconstrução do Erro com PCA</td>
+      <td style="text-align: center">0.906</td>
+      <td style="text-align: center">0.920</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h1 id="referências">Referências</h1>
+
+<ol>
+  <li><a href="https://ieeexplore.ieee.org/abstract/document/4907305?casa_token=w9MUoiiYek0AAAAA:fesefux_fHbeYovRlIdo7iGaM7sZ4yNOXVv4VCdtKCc_8WoaE6cDzu4pUQq3OGXG889Ot57Pf4OcFQ">PCA-Based Outlier Detection</a></li>
+  <li><a href="https://stats.stackexchange.com/questions/259806/anomaly-detection-using-pca-reconstruction-error">Question in stackexchange: Anomaly detection using PCA reconstruction error</a></li>
+  <li><a href="https://www.semanticscholar.org/paper/A-Survey-on-Outlier-Detection-Techniques-for-Credit-Pawar-Kalavadekar/863e77593b9c3abed4d83348e2dc898a0bd9e850?p2df">A Survey on Outlier Detection Techniques for Credit Card Fraud Detection</a></li>
+  <li><a href="https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html">sklearn PCA</a></li>
+  <li><a href="https://www.mikulskibartosz.name/pca-how-to-choose-the-number-of-components/">PCA — how to choose the number of components?</a></li>
+  <li><a href="https://www.kaggle.com/mlg-ulb/creditcardfraud">Kaggle Credit Cart Fraud Dataset</a></li>
+</ol>
+
+
+  
+    
+      <div class="post-tags-section">
+  <i class="post-tags-icon fas fa-tags"></i>
+  <ul class="post-tags"><li>
+        <a class="post-tag" href="/pt/tags/#python">python</a></li><li>
+        <a class="post-tag" href="/pt/tags/#machine-learn">machine-learn</a></li><li>
+        <a class="post-tag" href="/pt/tags/#pca">pca</a></li></ul>
+</div>
+
+  
+
+  
+</article>
+
+
+<aside class="related">
+  <h2>Related posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <a href="/pt/2020/09/29/teste/">
+          Testeeee
+          <small><time datetime="2020-09-29T12:18:00-03:00">29 Sep 2020</time></small>
+        </a>
+      </li>
+    
+  </ul>
+</aside>
+
+
+</main>
+
+<footer class="footer"><small>
+    &copy; 2020&nbsp;-&nbsp;2021 <a href="https://github.com/leocneves/">Leonardo C. Neves</a>. All rights reserved.
+    Powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://github.com/vszhub/not-pure-poole">Not Pure Poole</a>.
+  </small>
+</footer>
+</div>
+      <div class="sidebar-right pure-u-1 pure-u-md-1-4">
+</div>
+    </div>
+
+    <script async src="https://use.fontawesome.com/releases/v5.0.12/js/all.js"></script><script>
+  function strip(str, remove) {
+    while (str.length > 0 && remove.indexOf(str.charAt(0)) != -1) {
+      str = str.substr(1);
+    }
+    while (str.length > 0 && remove.indexOf(str.charAt(str.length - 1)) != -1) {
+      str = str.substr(0, str.length - 1);
+    }
+    return str;
+  }
+
+  function scroll() {
+    console.log('scroll');
+    window.scrollTo({
+      left: 0, 
+      top: window.innerHeight,
+      behavior: 'smooth'
+    });
+    sessionStorage.removeItem('forceCheckScroll');
+  }
+
+  const forceCheckScroll = sessionStorage.getItem('forceCheckScroll') === 'true';
+  const checkScroll = strip(window.location.pathname, '/') !== strip('/pt', '/');
+
+  if (forceCheckScroll || checkScroll) {
+    const maxWidth = "(max-width: 48rem)";
+    const result = window.matchMedia(maxWidth);
+    if (result.matches) {
+      scroll();
+    } else {
+      result.addListener((match) => {
+        if (match.media == maxWidth) {
+          if (match.matches) {
+            scroll();
+          }
+        }
+      });
+    }
+  }
+</script>
+</body>
+</html>

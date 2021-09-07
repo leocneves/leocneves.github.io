@@ -45,6 +45,7 @@ google_site_verification: xxxxx
 
 languages: ["en", "pt"]
 
+
 sass:
   sass_dir: _sass
   style: :compressed
